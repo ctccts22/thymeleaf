@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 import java.util.List;
 
+
 @Controller
 @Slf4j
 public class ExamController {
     /*
      * @PostConstruct : 객체가 생성 뒤에 이벤트 처리
+     *
      */
 
     @PostConstruct
