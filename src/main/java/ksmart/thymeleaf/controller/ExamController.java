@@ -162,7 +162,7 @@ public class ExamController {
     }
 
 
-
+// 강형준
     @GetMapping("/exam2")
     public String exam2(Model model) {
         List<Member> memberList =  examService.getMemberList();
