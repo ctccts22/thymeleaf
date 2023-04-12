@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}" lang="en">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">객체바인딩</title>
+</head>
+<th:block layout:fragment="costomContents">
+	<h1>thymeleaf 객체 바인딩</h1>
+	- 문법 : ${키} model 객체에 담겨진 데이터 반환 <br>
+	- 1. 태그 속성을 이용한 방식 <br>
+	<!-- 타임리프 주석처리하는 방법 <!--/*  */-->  -->
+	<!--/* ${memberInfo} */-->
+	<!--/* 1. thymeleaf 객체바인딩 하기위해서 ${모델객체에 담긴 키}를 사용 */-->
+	<h1 th:text="${memberInfo}"></h1>
+	- 2. 표현식을 이용한 방식 <br>
+	<h1>[[${memberInfo}]]</h1>
+	
+	<h1>thymeleaf 객체속성 바인딩</h1>
+	-1. 도트연산자(.)를 이용한 방식
+	-2. 객체 메소드 호출하는 방식
+	-3. 객체['키'] 를 이용한 방식
+	<!--/* thymeleaf 바인딩된 객체의 맴버변수 접근${키.멤버변수} */-->
+	<!--/* get 혹은 set 의 카멜표기법 유지시 가능 */-->	
+	<!--/* <h1 th:text="${memberInfo.memberId()}"></h1> */-->
+	<!--/* <h1 th:text="${memberInfo.getMemberId()}"></h1> */-->
+	<!--/* <h1 th:text="${memberInfo['memberId]}"></h1> */-->
+	
+	<h1>이스케이프 vs 언이스케이프</h1>
+	- 이스케이프 : HTML에서 사용되는 특수문자를 HTML 엔티티로 변경하는것 <br>
+	<!-- 언이스케이프 : ex:) <script> alert('123') </script>  -->
+	<!-- 이스케이프 : ex:) &lt;script&gt;alert('123')&lt;/script&gt;  -->
+	<input type="text" th:value="${memberInfo.memberId}" readonly="readonly"/>
+	<div th:with="ex=${'한국스마트정보교육원<br>개발자46기'}">
+	</div>
+	<div th:utext="${ex}"></div>
+	<div>[(${ex})]</div>
+	<div th:text="${ex}"></div>
+	<div>[[${ex}]]</div>
+	
+	
+	<h1>thymeleaf 스크립트에서 data 바인딩</h1>
+	<script type="text/javascript" th:inline="javascript">
+		const memberInfo = [[${memberInfo}]];
+		console.log(memberInfo)
+		let memberId = memberInfo.memberId;
+		
+		for(let key in memberInfo){
+			console.log(`${key}: ${memberInfo[key]}`)
+		}
+		
+		
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+
+</th:block>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">ajax</title>
+    <style type="text/css">
+        table{
+            border: 1px solid black;
+            width: 700px;
+            table-layout: auto;
+            text-align: center;
+        }
+        th {
+            border: 1px solid black;
+            background-color: cornflowerblue;
+            color: azure;
+            height: 30px;
+        }
+        td {
+            border: 1px solid black;
+            height: 30px;
+        }
+    </style>
+</head>
+<th:block layout:fragment="costomContents">
+<button id="ajaxBtn">회원리스트 출력</button><br><br><br>
+<table>
+    <thead>
+    <tr>
+        <th>회원아이디</th>
+        <th>회원비밀번호</th>
+        <th>회원등급</th>
+        <th>회원이름</th>
+        <th>회원연락처</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script>
+    // const ajaxBtn = document.getElementById('ajaxBtn');
+    // ajaxBtn.addEventListener('click', function () {
+    //     fetch('/memberInfo/list')
+    //         .then(response => response.json())
+    //         .then(memberList => {
+    //
+    //             memberList.forEach(function (item, idx) {
+    //                 console.log(item + '||' + idx);
+    //             })
+    //
+    //         });
+    // });
+
+    const $ajaxBtn = document.getElementById('ajaxBtn');
+    const $tableBody = document.querySelector('tbody');
+    $ajaxBtn.addEventListener('click', function () {
+        fetch('/memberInfo/list')
+            .then(response => response.json())
+            .then(memberList => {
+                // Clear the table body
+                $tableBody.innerHTML = '';
+
+                // Loop through the member list and add a row for each member
+                memberList.forEach(function (item, idx) {
+                    const row = document.createElement('tr');
+                    for(let key in item) {
+                        const Cell = document.createElement('td');
+                        Cell.textContent = item[key];
+                        row.appendChild(Cell);
+                    }
+                    $tableBody.appendChild(row);
+                });
+            })
+            .catch(e => console.log(e))
+    });
+
+</script>
+
+</th:block>
+</html>

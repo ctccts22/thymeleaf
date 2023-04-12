@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}" lang="en">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">회원정보</title>
+<style type="text/css">
+	table{
+		border: 1px solid black;
+		width: 700px;
+		table-layout: auto;
+		text-align: center;	
+	}
+	th{
+		border: 1px solid black;
+		background-color: cornflowerblue;
+		color: azure;
+		height: 30px;
+	}
+	td{
+		border: 1px solid black;
+		height: 30px;
+	}
+</style>
+</head>
+<th:block layout:fragment="costomContents">
+		<table th:object="${memberInfo}">
+		<thead>
+			<tr>
+				<th>회원아이디</th>
+				<th>회원비밀번호</th>
+				<th>회원등급</th>
+				<th>회원이름</th>
+				<th>회원연락처</th>			
+			</tr>
+		</thead>
+		<tbody>
+			<tr>				
+				<td th:text="*{memberId}"></td>
+				<td th:text="*{memberPw}"></td>
+				<td th:text="*{memberLevel}"></td>
+				<td th:text="*{memberName}"></td>
+				<td th:text="*{memberMobile}"></td>
+			</tr>		
+		</tbody>	
+		</table>
+</th:block>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

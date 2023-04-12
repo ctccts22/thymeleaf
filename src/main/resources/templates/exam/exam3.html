@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}" lang="en">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">조건문과 지역변수 th:object</title>
+<style type="text/css">
+	table{
+		border: 1px solid black;
+		width: 700px;
+		table-layout: auto;
+		text-align: center;	
+	}
+	th{
+		border: 1px solid black;
+		background-color: cornflowerblue;
+		color: azure;
+		height: 30px;
+	}
+	td{
+		border: 1px solid black;
+		height: 30px;
+	}
+</style>
+</head>
+<th:block layout:fragment="costomContents">
+	<h1 >thymeleaf 조건문</h1>
+ 	- 태그 속성을 이용한 조건문 th:if , th:unless, th:switch
+ 	- ex) th:if="${memberInfo == null}"
+ 	- 태그 중심, 조건문의 반환값이 true일때 태그를 렌더링 한다.
+ 	
+ 	<h1>thymeleaf 지역변수</h1>
+ 	- 태그 속성을 이용한 지역변수 선언 th:with
+ 	- ex:) th:with="키1=${변수키1},키2=${변수키2}"<br>
+ 	- 지역변수의 범위는 태그가 닫힐 때까지의 유효범위<br>
+ 	<!-- 지역변수 th:with -->
+ 	<table th:with="target1=${memberInfo.memberId},target2=${memberInfo.memberPw}">
+		<thead>
+			<tr>
+				<th>회원아이디</th>
+				<th>회원비밀번호</th>
+				<th>회원등급</th>
+				<th>회원이름</th>
+				<th>회원연락처</th>
+			</tr>
+		</thead>			
+		<tbody>
+			<tr th:each="l : ${memberList}">
+				<!-- 조건문 th:if 조건식 true-->
+				<td th:if="${l.memberId == target1}" th:text="${l.memberId}" style="color : red;"></td>
+				<!-- 조건문 th:unless 조건식 false-->
+				<td th:unless="${l.memberId == target1}" th:text="${l.memberId}"></td>
+				<!-- 조건문 th:switch th:case="일치하는값" (default 구문 == th:case="*") -->
+				<th:block th:switch="${target2}">
+					<td th:case="${l.memberPw}" th:text="${l.memberPw}" style="color:blue;"></td>
+					<td th:case="*" th:text="${l.memberPw}"></td>
+				</th:block>
+				<th:block th:switch="${l.memberLevel}">
+					<td th:case="'관리자'" th:text="${l.memberLevel}" style="color:orange;"></td>
+					<td th:case="'판매자'" th:text="${l.memberLevel}" style="color:purple;"></td>
+					<td th:case="*" th:text="${l.memberLevel}" style="color:yellow;"></td>
+				</th:block>			
+					
+				<td>[[${l.memberName}]]</td>
+				
+				<td th:text ="${l.memberMobile}"></td>
+			
+			</tr>
+		</tbody> 	
+ 	</table>
+
+	<!-- th:Object 객체를 바인딩 시 유용하게 사용할 수 있는 구문  -->
+	<!-- ${memberInfo.memberId} -->
+		<th:block th:object="${memberInfo}" th:with="target=null">
+			<h1 th:text="${memberInfo.memberId}"> </h1>
+			<h1 th:text="*{memberId}"></h1>
+			<!-- javascript (?? null병합연산자) == thymeleaf(?: null 병합연산자)  -->
+			<h1 th:text="*{memberName ?: '회원의 이름이 없습니다.'}"></h1>
+			<h1 th:text="${target ?: 'targer의 값이 null 입니다'}"></h1>
+			<!-- 삼항연산자  -->
+			<h1 th:text="*{(memberName == null) ? '회원의 이름이 없습니다.' : memberName}"></h1>
+			
+			
+		</th:block>
+
+	
+
+
+
+</th:block>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

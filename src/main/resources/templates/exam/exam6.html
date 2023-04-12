@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}" lang="en">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">thymeleaf 링크표현</title>
+</head>
+<th:block layout:fragment="costomContents">
+
+
+	<h1>thymeleaf 링크</h1>
+	- 구문 th:src, th:href -> ex)th:href="@{주소값}" , th:src="@{주소값}"
+	
+	<th:block th:object="${memberInfo}"> <br>
+		<a th:href="@{http://www.thymeleaf.org}"> 타임리프 공식사이트 </a> <br>
+		<!-- get방식의 쿼리 스트링 표현방법  -->
+		<!-- /exam7?memberId=id001&memberPw=pw001 -->
+		<a th:href="@{/exam7(memberId=*{memberId},memberPw=*{memberPw})}">하이퍼링크1</a> <br>
+		<!-- 잘못된 표현  -->
+		<a href="@{/exam7(memberId=*{memberId},memberPw=*{memberPw})}">잘못된 하이퍼링크</a> <br>
+		<!-- rest api 처럼 표기하는방법 /member/id001 -->
+		<a th:href="@{|/member/*{memberId}|}">하이퍼링크2</a> <br>
+		<!-- or || 사이에 감싸준다. -->
+		<a th:href="@{/member/{memberId}(memberId=*{memberId})}">하이퍼링크3</a> <br>
+		
+		<!-- rest api  -->
+		<a th:href="@{/memberInfo/{memberId}(memberId=*{memberId})}">하이퍼링크3</a> <br>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+	</th:block>
+	
+
+</th:block>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
