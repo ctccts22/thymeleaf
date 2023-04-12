@@ -88,7 +88,7 @@ public class ExamController {
      * 					,required="ture | false" -> 키값은 무조건 존재여부) 데이터타입 매개변수명
      * 2. 커맨드 객체 (잘 만들어 놓은 dto) set get 메서드가 미리 존재해야하고 카멜표기법준수가 필수임. 그래야 쓸수있음
      * 	@return
-     * 3. 생성자 메소드 주입방식
+     * 3. 생성자 메소드 주입방식.
      */
 
 
